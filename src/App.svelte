@@ -1,20 +1,23 @@
-<script lang="ts">
-  import { Route, router } from 'tinro';
-  import Announcer from './components/announcer.svelte';
-  import Transition from './components/transition.svelte';
-  import Home from './home.svelte';
-  router.mode.hash();
-  router.subscribe((_) => window.scrollTo(0, 0));
+<!-- src/App.svelte -->
+<script>
+  import { Router, Link, Route } from "svelte-routing";
+  import Home from "./home.svelte";
+  import WalletSignIn from "./components/WalletSignIn.svelte";
+
+  export let url = "/";
 </script>
 
-<main />
-
-<Announcer />
-<Transition>
-  <Route path="/">
-    <Home />
-  </Route>
-</Transition>
+<Router {url}>
+  <nav>
+    <Link to="/">Home</Link>
+    <Link to="/wallet-sign-in">Wallet Sign In</Link>
+  </nav>
+  <div>
+    <Route path="/wallet-sign-in" component={WalletSignIn} />
+    <Route path="/"><Home /></Route>
+  </div>
+</Router>
 
 <style>
+  /* Add any global styles here */
 </style>
